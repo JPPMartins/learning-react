@@ -5,14 +5,11 @@ const person = (props) => {
 
 // conteúdo dinâmico com props
 return (
-<div> 
-    <p> Eu sou o {props.name}, tenho {props.age} anos!! </p> 
+<div className="Person"> 
+    <p onClick={props.click}> Eu sou o {props.name}, tenho {props.age} anos!! </p> 
     <p> {props.children} </p>
+    <input type="text" onChange={props.changed} />
 </div>
-
-
-)
- 
-}
+)}
 
 export default person;
