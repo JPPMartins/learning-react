@@ -1,81 +1,70 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import './Person/Person.css';
-import Person from './Person/Person';
+//import './Person/Person.css';
+//import Person from './Person/Person';
+import UserOutPut from './UserOutput/UserOutput';
+import UserInput from './UserInput/UserInput';
+import './UserInput/UserInput.css';
+import './UserOutput/UserOutput.css';
 
+/*
+Siga as instruções explicadas no vídeo do problema e tente implementar uma solução por conta própria. Compare-o com a minha solução (vídeos + arquivos para download) depois.
+
+As instruções são:
+
+OK - 1) Crie dois novos componentes: UserInput e UserOutput
+OK - 2) UserInput deve conter um elemento de entrada, UserOutput dois parágrafos
+OK - 3) Saída de vários componentes UserOutput no componente App (qualquer texto de parágrafo de sua escolha)
+OK - 4) Passe um nome de usuário (de sua escolha) para UserOutput por meio de adereços e exiba-o lá
+OK - 5) Adicione estado ao componente App (=> o nome de usuário) e passe o nome de usuário para o componente UserOutput
+OK - 6) Adicione um método para manipular o estado (=> um método manipulador de eventos)
+OK - 7) Passe a referência do método manipulador de eventos ao componente UserInput e ligue-o ao evento de alteração de entrada
+OK - 8) Verifique se a nova entrada inserida pelo usuário substitui o nome de usuário antigo passado para UserOutput
+9) Adicione ligação bidirecional à sua entrada (em UserInput) para também exibir o nome de usuário inicial
+10) Adicione estilo de sua escolha aos seus componentes/elementos nos componentes - com estilos embutidos e folhas de estilo
+
+*/
 
 class App extends Component {
   state = {
-    persons: [
-      {name: "João Paulo", age: 25},
-      {name: "Marina", age: 20},
-      {name: "Julia", age: 21}
+    users: [
+      {name: "Marina Bonetti", age: 20 },
+      {name: "Julia Martins", age: 20}
     ]
   }
 
-  updateNameState = (newName) => {
-    //console.log("foi clicado!");
-    //Não fazer isso: this.state.persons[0].name = 'Maximiliam";
-    this.setState( {
-      persons: [
-        {name: newName, age: 45},
-        {name: "Graciana", age: 40},
-        {name: "Leonardo", age: 41}
+  UpdateNameState = (dataName, dataAge) => {
+    this.setState({
+      users: [
+        {name: dataName, age: dataAge },
+        {name: "João Martins", age:45 }
       ]
     });
   }
 
-  changeNameState = (event) => {
-    this.setState( {
-      persons: [
-        {name: 'newName', age: 45},
-        {name: event.target.value, age: 40},
-        {name: "Leonardo", age: 41}
+  ChangeNameState = (event) => {
+    this.setState({
+      users: [
+        {name: event.target.value},
+        {name: "Renato", age: 47 }
+        
       ]
     });
   }
+
 
   render() {
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
     return (
       <div className="App">
-        <h1> Hello World!!! </h1>
-        <p> This is really good! </p>
-        <button style={style} onClick={() => this.updateNameState('João Paulo PM')}> Update Data </button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} click={this.updateNameState.bind(this, 'JP')}>Meus Hobbies: Futebol</Person>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} changed={this.changeNameState}></Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}></Person>
+        <h1> Primeiro exercício de React </h1>
+        <button onClick={() => this.UpdateNameState('Maria Aparecida', '72')}> Update Information </button>
+        <UserOutPut name={this.state.users[0].name} age={this.state.users[0].age}></UserOutPut>
+        <UserOutPut name={this.state.users[1].name} age={this.state.users[1].age}></UserOutPut>
+        <UserOutPut name="João Paulo" age="25"></UserOutPut>
+        <UserInput name={this.state.users[0].name} changed={this.ChangeNameState}></UserInput>
       </div>
     );
-    // html não é JSX
-    //return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Isso está funcionando'));
-
-    /*return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );*/
   }
 }
 
